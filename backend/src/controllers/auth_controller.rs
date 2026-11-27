@@ -8,8 +8,8 @@ use axum::{
     response::{IntoResponse, Response},
 };
 
-use crate::auth::{buat_token, validasi_token};
 use crate::models::user::{User, UserError};
+use crate::services::jwt_service::{buat_token, validasi_token};
 use crate::views::error_view::error_response;
 use serde::Deserialize;
 use serde_json::json;
@@ -93,10 +93,7 @@ pub async fn login(
             Ok(Some(akun)) => akun,
 
             Ok(None) => {
-                return error_response(
-                    StatusCode::UNAUTHORIZED,
-                    "Username atau password salah",
-                );
+                return error_response(StatusCode::UNAUTHORIZED, "Username atau password salah");
             }
 
             Err(UserError::AkunTidakAktif) => {
@@ -161,5 +158,3 @@ pub async fn logout(Extension(jwt_secret): Extension<Arc<str>>, headers: HeaderM
     )
         .into_response()
 }
-
-

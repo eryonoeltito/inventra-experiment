@@ -25,7 +25,7 @@ impl std::fmt::Display for UserError {
         match self {
             Self::Database(error) => write!(formatter, "database error: {error}"),
             Self::PasswordHash(error) => write!(formatter, "password hash error: {error}"),
-            Self::AkunTidakAktif=>write!(formatter, "akun tidak aktif")
+            Self::AkunTidakAktif => write!(formatter, "akun tidak aktif"),
         }
     }
 }
@@ -119,17 +119,16 @@ impl User {
     }
 }
 
-    fn verifikasi_password(password: &str, password_hash: &str) -> bool {
-        let Ok(parsed_hash) = PasswordHash::new(password_hash) else {
-            return false;
-        };
+fn verifikasi_password(password: &str, password_hash: &str) -> bool {
+    let Ok(parsed_hash) = PasswordHash::new(password_hash) else {
+        return false;
+    };
 
-        Argon2::default()
-            .verify_password(password.as_bytes(), &parsed_hash)
-            .is_ok()
-    }
+    Argon2::default()
+        .verify_password(password.as_bytes(), &parsed_hash)
+        .is_ok()
+}
 
-    fn role_login_diizinkan(role: Option<&str>) -> bool {
-        matches!(role, Some("admin" | "petugas_gudang"))
-    }
-
+fn role_login_diizinkan(role: Option<&str>) -> bool {
+    matches!(role, Some("admin" | "petugas_gudang"))
+}

@@ -2,8 +2,8 @@ use std::sync::Arc;
 
 use crate::views::error_view::error_response;
 use crate::{
-    auth::validasi_token,
     models::user::{AkunTerverifikasi, User},
+    services::jwt_service::validasi_token,
 };
 use axum::{
     extract::{Extension, Request},
@@ -70,4 +70,3 @@ pub async fn wajib_login(
     request.extensions_mut().insert::<AkunTerverifikasi>(akun);
     next.run(request).await
 }
-

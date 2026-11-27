@@ -43,7 +43,7 @@ pub async fn list_barang(
             ));
         }
     };
-    
+
     let barang = hasil.map_err(|error| {
         eprintln!("Gagal mengambil data barang: {error}");
         error_response(
@@ -246,10 +246,7 @@ pub async fn patch_barang(
         error_response(rejection.into_response().status(), "Body JSON tidak valid")
     })?;
     if let Err(errors) = data.validasi() {
-        return Err(error_response(
-            StatusCode::BAD_REQUEST,
-            errors.join("; "),
-        ));
+        return Err(error_response(StatusCode::BAD_REQUEST, errors.join("; ")));
     }
 
     let hasil = match akun.role.as_deref() {

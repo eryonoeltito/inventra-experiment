@@ -63,11 +63,7 @@ fn validasi_field_barang(
 
 impl BarangBaru {
     pub fn validasi(&self) -> Result<(), Vec<String>> {
-        let errors = validasi_field_barang(
-            Some(&self.nama),
-            Some(self.stok),
-            Some(self.harga),
-        );
+        let errors = validasi_field_barang(Some(&self.nama), Some(self.stok), Some(self.harga));
 
         if errors.is_empty() {
             Ok(())
@@ -79,16 +75,9 @@ impl BarangBaru {
 
 impl BarangUpdate {
     pub fn validasi(&self) -> Result<(), Vec<String>> {
-        let mut errors = validasi_field_barang(
-            self.nama.as_deref(),
-            self.stok,
-            self.harga,
-        );
+        let mut errors = validasi_field_barang(self.nama.as_deref(), self.stok, self.harga);
 
-        if self.nama.is_none()
-            && self.stok.is_none()
-            && self.harga.is_none()
-        {
+        if self.nama.is_none() && self.stok.is_none() && self.harga.is_none() {
             errors.push("Tidak ada data yang diubah".to_string());
         }
 
@@ -183,7 +172,6 @@ impl Barang {
         .fetch_one(pool)
         .await?;
 
-        
         Ok(barang)
     }
 
