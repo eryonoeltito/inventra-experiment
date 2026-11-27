@@ -8,7 +8,7 @@ use serde_json::json;
 use sqlx::PgPool;
 
 use crate::{
-    controllers::{auth_controller, barang_controller, riwayat_stok_controller},
+    controllers::{auth_controller, barang_controller, gudang_controller, riwayat_stok_controller},
     middleware::auth_middleware::wajib_login,
     views::error_view::error_response,
 };
@@ -20,6 +20,7 @@ pub fn router(pool: PgPool, jwt_secret: std::sync::Arc<str>) -> Router {
         .route("/api/auth/logout", post(auth_controller::logout));
 
     let protected_routes = Router::new()
+        .route("/api/gudang", get(gudang_controller::ambil_daftar_gudang))
         .route(
             "/api/barang",
             get(barang_controller::list_barang).post(barang_controller::buat_barang),
