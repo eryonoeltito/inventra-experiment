@@ -22,6 +22,10 @@ pub fn router(pool: PgPool, jwt_secret: std::sync::Arc<str>) -> Router {
     let protected_routes = Router::new()
         .route("/api/gudang", get(gudang_controller::ambil_daftar_gudang))
         .route(
+            "/api/gudang/{id}",
+            get(gudang_controller::ambil_detail_gudang),
+        )
+        .route(
             "/api/barang",
             get(barang_controller::list_barang).post(barang_controller::buat_barang),
         )
