@@ -1,4 +1,5 @@
 mod controllers;
+mod models;
 mod routes;
 mod views;
 
@@ -9,7 +10,7 @@ async fn main() {
         .await
         .expect("failed to bind to 127.0.0.1:3000");
     println!("Frontend INVENTRA berjalan di http://127.0.0.1:3000");
-    
+
     axum::serve(listener, app)
         .await
         .expect("frontend server failed");

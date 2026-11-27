@@ -1,0 +1,66 @@
+{% extends "layouts/base.html" %}
+{% block title %}Dashboard · INVENTRA{% endblock %}
+{% block content %}
+<section class="page-heading" aria-labelledby="judul-dashboard">
+  <div>
+    <h1 id="judul-dashboard">Selamat datang, {{ data.nama_pengguna }} <span aria-hidden="true">👋</span></h1>
+    <p class="heading-description">Berikut ringkasan kondisi inventaris seluruh gudang.</p>
+  </div>
+  <div class="date-chip"><span class="date-icon" aria-hidden="true">▦</span><span>Periode laporan<small>1–30 November 2026 <span aria-hidden="true">⌄</span></small></span></div>
+</section>
+
+<section class="summary-grid" aria-label="Ringkasan inventaris">
+  {% for kartu in data.ringkasan %}
+  <article class="summary-card">
+    <div class="summary-top"><span class="summary-label">{{ kartu.label }}</span><span class="summary-icon {{ kartu.warna }}"><svg aria-hidden="true"><use href="#ikon-{{ kartu.ikon }}"/></svg></span></div>
+    <strong class="summary-value">{{ kartu.nilai }}</strong>
+    <span class="summary-footnote">{{ kartu.keterangan }}</span>
+  </article>
+  {% endfor %}
+</section>
+
+<section class="insight-grid" aria-label="Analisis inventaris">
+  <article class="panel movement-panel">
+    <header class="panel-heading"><div><h2>Perubahan Stok</h2><p>Pergerakan stok masuk dan keluar</p></div><span class="panel-period">30 HARI</span></header>
+    <div class="bar-chart" role="img" aria-label="Grafik perubahan stok masuk dan keluar selama November 2026">
+      <div class="chart-plot">
+        <div class="chart-gridlines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        {% for batang in data.pergerakan_stok %}
+        <div class="bar-column"><div class="bar bar-{{ batang.warna }} tinggi-{{ batang.tinggi }}"></div><span class="bar-label">{{ batang.label }}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+  </article>
+
+  <article class="panel warehouse-panel">
+    <header class="panel-heading"><div><h2>Distribusi Barang per Gudang</h2><p>Jumlah barang terdaftar di setiap lokasi</p></div></header>
+    <div class="warehouse-list">
+      {% for gudang in data.distribusi_gudang %}
+      <div class="warehouse-row"><span class="warehouse-name">{{ gudang.nama }}</span><div class="progress-track" role="img" aria-label="{{ gudang.nama }}: {{ gudang.jumlah }}"><span class="progress-{{ gudang.warna }} lebar-{{ gudang.lebar }}"></span></div><strong class="warehouse-count">{{ gudang.jumlah }}</strong></div>
+      {% endfor %}
+    </div>
+    <div class="warehouse-foot">Total 1.284 barang</div>
+  </article>
+</section>
+
+<section class="panel inventory-panel" aria-labelledby="judul-barang-terbaru">
+  <header class="panel-heading inventory-heading"><div><h2 id="judul-barang-terbaru">Daftar Barang Terbaru</h2><p>Pantau dan kelola data inventaris dari seluruh gudang.</p></div></header>
+  <div class="table-tools" aria-label="Kontrol tabel pratinjau">
+    <input type="search" placeholder="Cari nama atau kode barang..." aria-label="Cari barang" disabled>
+    <button type="button" disabled>Semua Gudang <span aria-hidden="true">⌄</span></button>
+    <button type="button" disabled>Semua Status <span aria-hidden="true">⌄</span></button>
+    <button class="add-button" type="button" disabled>+ Tambah Barang</button>
+  </div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col">Nama Barang</th><th scope="col">Kode Barang</th><th scope="col">Gudang</th><th scope="col">Stok</th><th scope="col">Harga</th><th scope="col">Total Nilai</th><th scope="col">Status Stok</th><th scope="col"><span class="visually-hidden">Aksi</span></th></tr></thead>
+      <tbody>
+        {% for barang in data.barang_terbaru %}
+        <tr><td class="item-name">{{ barang.nama }}</td><td class="item-code">{{ barang.kode }}</td><td>{{ barang.gudang }}</td><td class="stock-value">{{ barang.stok }}</td><td>{{ barang.harga }}</td><td>{{ barang.total_nilai }}</td><td><span class="status status-{{ barang.kelas_status }}"><i aria-hidden="true"></i>{{ barang.status }}</span></td><td><span class="row-more" aria-hidden="true">···</span></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="table-footer"><span>Menampilkan 4 dari 1.284 barang contoh</span></div>
+</section>
+{% endblock %}
