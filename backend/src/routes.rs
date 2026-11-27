@@ -20,10 +20,16 @@ pub fn router(pool: PgPool, jwt_secret: std::sync::Arc<str>) -> Router {
         .route("/api/auth/logout", post(auth_controller::logout));
 
     let protected_routes = Router::new()
-        .route("/api/gudang", get(gudang_controller::ambil_daftar_gudang))
+        .route(
+            "/api/gudang",
+            get(gudang_controller::ambil_daftar_gudang).post(gudang_controller::buat_gudang),
+        )
         .route(
             "/api/gudang/{id}",
-            get(gudang_controller::ambil_detail_gudang),
+            get(gudang_controller::ambil_detail_gudang)
+                .put(gudang_controller::ubah_gudang)
+                .patch(gudang_controller::patch_gudang)
+                .delete(gudang_controller::hapus_gudang),
         )
         .route(
             "/api/barang",
