@@ -1,0 +1,13 @@
+{% extends "layouts/auth.html" %}
+{% block title %}Menunggu persetujuan · INVENTRA{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <div class="pending-mark" aria-hidden="true"><span></span></div>
+  <p class="auth-eyebrow">Status akun · Pratinjau</p>
+  <h1>Pendaftaran berhasil</h1>
+  <p class="pending-lead">Akun Anda belum aktif.</p>
+  <p class="pending-description">Pendaftaran sedang menunggu persetujuan Admin. Anda baru dapat masuk setelah akun disetujui dan diaktifkan.</p>
+  <p class="preview-message">Ini contoh tampilan status. Status akun belum diambil dari API.</p>
+  <a class="button button-blue pending-login" href="/login">Kembali ke login</a>
+</div>
+{% endblock %}

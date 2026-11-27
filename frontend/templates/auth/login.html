@@ -1,0 +1,20 @@
+{% extends "layouts/auth.html" %}
+{% block title %}Masuk · INVENTRA{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <div class="auth-heading">
+    <p class="auth-eyebrow">Ruang kerja inventaris</p>
+    <h1>Masuk ke INVENTRA</h1>
+    <p>Gunakan akun yang telah diaktifkan oleh administrator.</p>
+  </div>
+  <p class="preview-message" id="status-form">Tampilan pratinjau. Login belum terhubung ke API.</p>
+  <div class="auth-fields" aria-describedby="status-form">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" autocomplete="username" placeholder="Masukkan username">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Masukkan password">
+    <button class="button button-blue auth-submit" type="button" disabled>Masuk</button>
+  </div>
+  <p class="auth-switch">Belum memiliki akun? <a href="/register">Daftar</a></p>
+</div>
+{% endblock %}

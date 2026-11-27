@@ -10,8 +10,6 @@ pub struct KartuRingkasan {
     pub label: &'static str,
     pub nilai: &'static str,
     pub keterangan: &'static str,
-    pub ikon: &'static str,
-    pub warna: &'static str,
 }
 
 pub struct BatangGrafik {
@@ -47,29 +45,21 @@ impl DashboardData {
                     label: "Total Barang",
                     nilai: "1.284",
                     keterangan: "Barang terdaftar",
-                    ikon: "kotak",
-                    warna: "biru",
                 },
                 KartuRingkasan {
                     label: "Total Stok",
                     nilai: "8.642",
                     keterangan: "Unit tersedia",
-                    ikon: "tumpukan",
-                    warna: "ungu",
                 },
                 KartuRingkasan {
                     label: "Total Gudang",
                     nilai: "3",
                     keterangan: "Lokasi penyimpanan",
-                    ikon: "gudang",
-                    warna: "hijau",
                 },
                 KartuRingkasan {
                     label: "Stok Menipis",
                     nilai: "18",
                     keterangan: "Perlu diperiksa",
-                    ikon: "peringatan",
-                    warna: "jingga",
                 },
             ],
             pergerakan_stok: [

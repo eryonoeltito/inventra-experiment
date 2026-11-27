@@ -1,0 +1,22 @@
+{% extends "layouts/auth.html" %}
+{% block title %}Daftar · INVENTRA{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <div class="auth-heading">
+    <p class="auth-eyebrow">Buat akun</p>
+    <h1>Daftar ke INVENTRA</h1>
+    <p>Buat akun untuk menggunakan ruang kerja inventaris.</p>
+  </div>
+  <p class="preview-message" id="status-form">Tampilan pratinjau. Pendaftaran belum terhubung ke API.</p>
+  <div class="auth-fields" aria-describedby="status-form">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" autocomplete="username" placeholder="Buat username">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Buat password">
+    <button class="button button-blue auth-submit" type="button" disabled>Buat akun</button>
+  </div>
+  <p class="approval-note">Akun baru menunggu persetujuan Admin sebelum dapat digunakan.</p>
+  <p class="auth-switch">Sudah memiliki akun? <a href="/login">Masuk</a></p>
+  <p class="auth-preview-link"><a href="/pending-approval">Lihat pratinjau status persetujuan</a></p>
+</div>
+{% endblock %}

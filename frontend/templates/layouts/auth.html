@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>{% block title %}Akun · INVENTRA{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body class="auth-page">
+  <header class="auth-header">
+    <a class="brand" href="/" aria-label="INVENTRA, halaman awal">
+      <span class="brand-mark" aria-hidden="true">I</span>
+      <span class="brand-name">INVENTRA<small>Manajemen inventaris</small></span>
+    </a>
+    <a class="back-home" href="/">Kembali ke beranda</a>
+  </header>
+  <main class="auth-main">
+    <section class="auth-content">
+      {% block content %}{% endblock %}
+    </section>
+  </main>
+  <footer class="auth-footer"><span>INVENTRA</span><span>Antarmuka pratinjau</span></footer>
+</body>
+</html>

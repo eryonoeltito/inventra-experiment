@@ -1,7 +1,10 @@
+use askama::Template;
 use axum::response::Html;
 
-const PAGE: &str = include_str!("../../templates/index.html");
+#[derive(Template)]
+#[template(path = "index.html")]
+struct HomeTemplate;
 
-pub fn index() -> Html<&'static str> {
-    Html(PAGE)
+pub fn index() -> Result<Html<String>, askama::Error> {
+    HomeTemplate.render().map(Html)
 }
